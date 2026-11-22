@@ -38,3 +38,29 @@ document.getElementById("downloadQR").addEventListener("click", function () {
     link.download = "Vishal-Social-QR.png";
     link.click();
 });
+
+
+async function updateVisitorCount() {
+    const counterElement = document.getElementById("visitorCount");
+
+    if (!counterElement) return;
+
+    try {
+        const response = await fetch(
+            "https://api.counterapi.dev/v1/vishal301206-dot/my-social-links/up"
+        );
+
+        if (!response.ok) {
+            throw new Error("Counter service unavailable");
+        }
+
+        const data = await response.json();
+
+        counterElement.textContent = data.count.toLocaleString();
+    } catch (error) {
+        console.error("Visitor counter error:", error);
+        counterElement.textContent = "Unavailable";
+    }
+}
+
+updateVisitorCount();
