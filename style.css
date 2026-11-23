@@ -169,3 +169,64 @@ footer {
     color: #a78bfa;
     text-shadow: 0 0 15px #8b5cf6;
 }
+
+
+/* Social Share Section */
+
+.social-share {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+}
+
+.social-share h3 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.social-share p {
+    color: #c9baff;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.share-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.share-buttons a {
+    display: block;
+    padding: 12px;
+    border-radius: 10px;
+    background: #393943;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.share-buttons a:hover {
+    background: #7544e8;
+    transform: scale(1.03);
+}
+
+#copyShareLink {
+    margin-top: 15px;
+    padding: 11px 18px;
+    border: 1px solid #a77aff;
+    border-radius: 25px;
+    background: #5633a0;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#copyShareLink:hover {
+    background: #7945e8;
+}
