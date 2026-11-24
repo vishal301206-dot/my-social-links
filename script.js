@@ -1,11 +1,25 @@
 
-const googleCounterURL = "https://script.google.com/macros/s/AKfycbxXTHg3QI5YieEeppBzQWaNsGLtWwN7j_o3LS5nSj1A-0CXRSw43ri9dKW9FXxM57Xs/exec";
+// Google Apps Script URL
+const googleCounterURL = "https://script.google.com/macros/s/AKfycbz3kBUGKqa1-31JeYPcBz6fn_IdlkmWHvXp6HPtTvJPXFn023DDHefIdBHRfDMbFsMa/exec";
 
 function showVisitorCount(data) {
     const counterElement = document.getElementById("visitorCount");
 
-    if (counterElement && data && data.count !== undefined) {
-        counterElement.textContent = data.count.toLocaleString();
+    if (counterElement && data.count !== undefined) {
+        counterElement.textContent =
+            Number(data.count).toLocaleString();
+    }
+}
+function showVisitorCount(data) {
+    const counterElement = document.getElementById("visitorCount");
+
+    if (counterElement) {
+        if (data && data.count !== undefined) {
+            counterElement.textContent =
+                Number(data.count).toLocaleString();
+        } else {
+            counterElement.textContent = "Unavailable";
+        }
     }
 }
 
