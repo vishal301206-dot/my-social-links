@@ -1,6 +1,7 @@
 
 // Google Apps Script URL
-const googleCounterURL = "https://script.google.com/macros/s/AKfycbycWaItcbNJvPnC-eWEUJidJrjHMhRdKza_Ur78E8NJg0Ry1EE6YEY6fQS7EMGJxmTC/exec";
+const googleCounterURL =
+    "https://script.google.com/macros/s/AKfycbycWaItcbNJvPnC-eWEUJidJrjHMhRdKza_Ur78E8NJg0Ry1EE6YEY6fQS7EMGJxmTC/exec";
 
 // Display visitor count
 function showVisitorCount(data) {
@@ -8,9 +9,10 @@ function showVisitorCount(data) {
 
     if (!counterElement) return;
 
-    if (data && data.count !== undefined) {
-        counterElement.textContent =
-            Number(data.count).toLocaleString();
+    const count = Number(data?.count);
+
+    if (Number.isFinite(count) && count >= 0) {
+        counterElement.textContent = count.toLocaleString();
     } else {
         counterElement.textContent = "Unavailable";
     }
@@ -22,30 +24,44 @@ function loadVisitorCounter() {
 
     if (!counterElement) return;
 
+    counterElement.textContent = "Loading...";
+
+    const callbackName = "__visitorCounterCallback";
+
     const script = document.createElement("script");
+    script.id = "visitor-counter-script";
 
-    script.src = googleCounterURL + "?callback=showVisitorCount";
+    window[callbackName] = function(data) {
+        clearTimeout(window.visitorCounterTimer);
 
-    const timeout = setTimeout(() => {
-        counterElement.textContent = "Unavailable";
+        showVisitorCount(data);
+
         script.remove();
-    }, 10000);
-
-    const originalCallback = showVisitorCount;
-
-    window.showVisitorCount = function(data) {
-        clearTimeout(timeout);
-        originalCallback(data);
-        script.remove();
+        delete window[callbackName];
     };
 
     script.onerror = function() {
-        clearTimeout(timeout);
+        clearTimeout(window.visitorCounterTimer);
+
         counterElement.textContent = "Unavailable";
+
         script.remove();
+        delete window[callbackName];
     };
+
+    script.src =
+        googleCounterURL +
+        "?callback=" + callbackName +
+        "&_=" + Date.now();
+
+    window.visitorCounterTimer = setTimeout(() => {
+        counterElement.textContent = "Unavailable";
+
+        script.remove();
+        delete window[callbackName];
+    }, 15000);
 
     document.body.appendChild(script);
 }
 
-loadVisitorCounter();
+document.addEventListener("DOMContentLoaded", loadVisitorCounter);
