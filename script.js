@@ -1,5 +1,5 @@
 
-const googleCounterURL = "https://script.google.com/macros/s/AKfycbxDGKN9l3uvRrbhOy8nN_NM4nNb6dd--ZhfDF-8Q8All2QiHcbVYJRKARsEVXGV79fM/exec";
+const googleCounterURL = "https://script.google.com/macros/s/AKfycbyUWQnNPYN7K6-Y2MnKKdLokOoFDu5h3NKF0baeteoxrwdbCspXPnb81fjKEEqaNHOJ/exec";
 
 function showVisitorCount(data) {
     const counterElement = document.getElementById("visitorCount");
