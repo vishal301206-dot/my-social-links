@@ -1,7 +1,7 @@
 
 // Google Apps Script URL
 const googleCounterURL =
-    "https://script.google.com/macros/s/AKfycbycWaitcbNJvPnC-eWEUJidJrjHMhRdKza_Ur78E8NJg0Ry1EE6YEY6fQS7EMGJxmTC/exec";
+    "https://script.google.com/macros/s/AKfycbycWaItcbNJvPnC-eWEUJidJrjHMhRdKza_Ur78E8NJg0Ry1EE6YEY6fQS7EMGJxmTC/exec";
 
 // Display visitor count
 function showVisitorCount(data) {
